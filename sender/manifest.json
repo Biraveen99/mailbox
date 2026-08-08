@@ -1,11 +1,23 @@
 {
-    "name": "Love Box",
-    "short_name": "Love Box",
-    "description": "Send meldinger til Love Box",
-    "start_url": "/",
-    "scope": "/",
-    "display": "standalone",
-    "background_color": "#fff2f7",
-    "theme_color": "#f267a0",
-    "orientation": "portrait"
+  "name": "Love Box",
+  "short_name": "Love Box",
+  "description": "Send meldinger til Love Box",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#fff2f7",
+  "theme_color": "#f267a0",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
