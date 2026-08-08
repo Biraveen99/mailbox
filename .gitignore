@@ -1,3 +1,6 @@
+# mailbox.db
+ backend/mailbox.db
+
 # Python virtual environments
 .venv/
 **/.venv/
