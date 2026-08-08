@@ -1,0 +1,11 @@
+{
+    "name": "Love Box",
+    "short_name": "Love Box",
+    "description": "Send meldinger til Love Box",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "background_color": "#fff2f7",
+    "theme_color": "#f267a0",
+    "orientation": "portrait"
+}
