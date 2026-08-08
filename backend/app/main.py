@@ -1,6 +1,12 @@
 from fastapi import FastAPI
 
-from app.database import get_connection, init_db
+from app.database import (
+    acknowledge_message as db_acknowledge_message,
+    create_message as db_create_message,
+    get_latest_message as db_get_latest_message,
+    get_messages as db_get_messages,
+    init_db,
+)
 from app.models import MessageCreate
 
 app = FastAPI()
@@ -15,17 +21,10 @@ def health():
 
 @app.post("/messages")
 def create_message(message: MessageCreate):
-    connection = get_connection()
-
-    cursor = connection.execute(
-        "INSERT INTO messages (title, body) VALUES (?, ?)",
-        (message.title, message.body),
+    message_id = db_create_message(
+        message.title,
+        message.body
     )
-
-    connection.commit()
-
-    message_id = cursor.lastrowid
-    connection.close()
 
     return {
         "id": message_id,
@@ -36,12 +35,19 @@ def create_message(message: MessageCreate):
 
 @app.get("/messages")
 def get_messages():
-    connection = get_connection()
+    return db_get_messages()
 
-    rows = connection.execute(
-        "SELECT id, title, body FROM messages ORDER BY id DESC"
-    ).fetchall()
 
-    connection.close()
+@app.get("/messages/latest")
+def get_latest_message():
+    return db_get_latest_message()
 
-    return [dict(row) for row in rows]
+
+@app.post("/messages/{message_id}/ack")
+def acknowledge_message(message_id: int):
+    updated = db_acknowledge_message(message_id)
+
+    return {
+        "id": message_id,
+        "acknowledged": updated,
+    }
